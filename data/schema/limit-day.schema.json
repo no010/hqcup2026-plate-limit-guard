@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/no010/hqcup2026-plate-limit-guard/data/schema/limit-day.schema.json",
+  "title": "Beijing vehicle restriction day",
+  "description": "Daily restriction data consumed by the Plate Limit Guard device.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "date",
+    "city",
+    "is_workday",
+    "restricted_tails",
+    "source",
+    "updated_at",
+    "data_version"
+  ],
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "city": {
+      "type": "string",
+      "const": "beijing"
+    },
+    "is_workday": {
+      "type": "boolean"
+    },
+    "restricted_tails": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9]$"
+      },
+      "uniqueItems": true,
+      "anyOf": [
+        {
+          "maxItems": 0
+        },
+        {
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
+    },
+    "windows": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "local_tail": {
+          "$ref": "#/$defs/window"
+        },
+        "nonlocal_peak_ban": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/window"
+          },
+          "maxItems": 3
+        },
+        "nonlocal_tail": {
+          "$ref": "#/$defs/window"
+        }
+      }
+    },
+    "source": {
+      "type": "string",
+      "format": "uri"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "valid_until": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 500
+    }
+  },
+  "$defs": {
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "area"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+        },
+        "end": {
+          "type": "string",
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+        },
+        "area": {
+          "type": "string",
+          "enum": [
+            "inside_5th_ring_excluding",
+            "inside_5th_ring_including",
+            "all_city"
+          ]
+        }
+      }
+    }
+  }
+}

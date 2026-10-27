@@ -1,0 +1,51 @@
+name: docs-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Markdown lint
+        run: npx --yes markdownlint-cli2@0.17.2 "**/*.md" "#node_modules"
+
+      - name: Validate JSON
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('data/schema/limit-day.schema.json','utf8')); JSON.parse(require('fs').readFileSync('data/current.json','utf8')); console.log('JSON OK')"
+
+      - name: Required files
+        run: |
+          set -e
+          for f in \
+            README.md \
+            LICENSE \
+            NOTICE \
+            LICENSES/Apache-2.0.txt \
+            LICENSES/CC-BY-4.0.txt \
+            docs/01-product-spec.md \
+            docs/02-hardware-spec.md \
+            docs/03-software-design.md \
+            docs/04-test-plan.md \
+            docs/05-competition-compliance.md \
+            hardware/kicad/plate-limit-guard.kicad_pro \
+            hardware/kicad/plate-limit-guard.kicad_sch \
+            hardware/kicad/plate-limit-guard.kicad_pcb \
+            data/schema/limit-day.schema.json \
+            data/current.json; do
+            test -f "$f" || { echo "missing: $f"; exit 1; }
+          done
+          echo "required files OK"

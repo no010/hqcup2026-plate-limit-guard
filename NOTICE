@@ -1,0 +1,15 @@
+限行哨兵 / Plate Limit Guard
+Copyright (c) 2026 限行哨兵 contributors
+
+Hardware design files, including schematics, PCB layout, fabrication data,
+BOM, and mechanical models, are licensed under the CERN Open Hardware Licence
+Version 2 - Strongly Reciprocal. See LICENSE.
+
+Software and firmware are licensed under the Apache License, Version 2.0.
+See LICENSES/Apache-2.0.txt.
+
+Documentation and images are licensed under the Creative Commons Attribution
+4.0 International License. See LICENSES/CC-BY-4.0.txt.
+
+Third-party components, models, libraries, and reference designs retain their
+own licenses. See docs/05-competition-compliance.md for the current register.

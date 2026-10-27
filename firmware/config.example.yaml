@@ -1,0 +1,52 @@
+# 限行哨兵配置示例
+# 复制为 config.yaml 后修改；不要直接把真实密钥提交到仓库。
+
+device:
+  id: gate-01
+  city: beijing
+  zone: inside_5th_ring # inside_5th_ring | outside_5th_ring | on_5th_ring_boundary
+  timezone: Asia/Shanghai
+
+recognition:
+  camera: /dev/video0
+  width: 1920
+  height: 1080
+  fps: 5
+  min_confidence: 0.85
+  cooldown_minutes: 10 # 同一车牌同一通知类型
+
+reminder:
+  window: ["06:30", "20:30"]
+  quiet_hours: ["22:00", "06:00"]
+  lead_minutes: 30
+  announce_unrestricted: false
+  include_masked_plate: false
+  templates:
+    current: "当前时段可能限行，请核对。"
+    pre: "今天稍后可能限行，请核对出行时间。"
+    unknown: "请核对车辆限行和进京规定。"
+
+modem:
+  port: /dev/ttyS3
+  baudrate: 115200
+  apn: cmnet
+
+data:
+  # v2 发布流程尚未实现；实现后替换为签名包地址或镜像列表
+  url: "https://example.invalid/beijing/rules-v2.json"
+  mirrors: []
+  refresh_hour: 0
+  refresh_minute: 5
+  retry_minutes: [1, 5, 15]
+  low_frequency_minutes: 30
+  cache_days: 7 # 仅用于审计；只有当天有效包可用于判断
+
+audio:
+  backend: ml307n_tts # ml307n_tts | rdk_i2s
+  volume: 80
+
+logging:
+  level: info
+  mask_plate: true
+  retain_days: 7
+  max_file_mb: 5

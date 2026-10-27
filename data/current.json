@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-27",
+  "city": "beijing",
+  "is_workday": true,
+  "restricted_tails": [
+    "1",
+    "6"
+  ],
+  "windows": {
+    "local_tail": {
+      "start": "07:00",
+      "end": "20:00",
+      "area": "inside_5th_ring_excluding"
+    },
+    "nonlocal_peak_ban": [
+      {
+        "start": "07:00",
+        "end": "09:00",
+        "area": "inside_5th_ring_including"
+      },
+      {
+        "start": "17:00",
+        "end": "20:00",
+        "area": "inside_5th_ring_including"
+      }
+    ],
+    "nonlocal_tail": {
+      "start": "09:00",
+      "end": "17:00",
+      "area": "inside_5th_ring_including"
+    }
+  },
+  "source": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202603/t20260323_4564097.html",
+  "updated_at": "2026-10-27T00:10:00+08:00",
+  "valid_until": "2026-10-28T00:00:00+08:00",
+  "data_version": 1,
+  "notes": "示例数据；定时抓取服务尚未接入。限行信息以官方通告为准。"
+}

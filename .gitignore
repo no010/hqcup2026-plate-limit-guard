@@ -1,0 +1,48 @@
+# KiCad 本地设置与备份
+*.kicad_prl
+*.kicad_sch-bak
+*.kicad_pcb-bak
+*.kicad_pro-bak
+*-backups/
+_autosave-*
+fp-info-cache
+*.lck
+*.bak
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ty/
+build/
+dist/
+
+# Node
+node_modules/
+
+# 日志
+*.log
+logs/
+
+# 密钥与本地配置
+.env
+.env.*
+*.key
+*.pem
+secrets/
+
+# 操作系统与编辑器
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# 可能包含真实车牌的原始测试素材
+docs/test-records/raw/
